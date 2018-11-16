@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-
+@{
+    bool isAdmin = User.HasClaim("Profile", "Admin");
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +36,10 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a asp-area="" asp-controller="Residue" asp-action="Index">Resíduos</a></li>
+                    }
+                    @if (isAdmin)
+                    {
+                        <li><a asp-area="Admin" asp-controller="" asp-action="">Admin</a></li>
                     }
                 </ul>
                 <partial name="_LoginPartial" />
