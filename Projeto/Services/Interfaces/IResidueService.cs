@@ -7,5 +7,6 @@ namespace Projeto.Services.Interfaces
     public interface IResidueService
     {
         Task<IList<Residue>> Residues(int skip = 0, int take = 10);
+        Task SaveAsync(Residue residue);
     }
 }

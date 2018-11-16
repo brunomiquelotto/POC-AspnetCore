@@ -36,6 +36,7 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a asp-area="" asp-controller="Residue" asp-action="Index">Resíduos</a></li>
+                        <li><a asp-area="" asp-controller="Cronogram" asp-action="Index">Cronograma</a></li>
                     }
                     @if (isAdmin)
                     {

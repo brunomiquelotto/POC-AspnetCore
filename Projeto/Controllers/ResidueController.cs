@@ -9,18 +9,29 @@ namespace Projeto.Controllers
 {
     public class ResidueController : BaseController
     {
-        private readonly IResidueService ResidueService;
-        private readonly PaginationService paginationService;
+        private readonly IResidueService _residueService;
+        private readonly PaginationService _paginationService;
+
         public ResidueController(IResidueService residueService, PaginationService paginationService)
         {
-            this.ResidueService = residueService;
-            this.paginationService = paginationService;
+            this._residueService = residueService;
+            this._paginationService = paginationService;
         }
 
         public IActionResult Index(int page = 1)
         {
-            IList<Residue> residues = this.paginationService.Get<Residue, string>(page, residue => residue.ResidueName);
+            IList<Residue> residues = _paginationService.Get<Residue, string>(page, residue => residue.ResidueName);
             return View(residues);
+        }
+
+        [HttpGet]
+        public IActionResult Create() => View();
+        
+        [HttpPost]
+        public async Task<IActionResult> Create(Residue residue)
+        {
+            await _residueService.SaveAsync(residue);
+            return RedirectToAction("Index");
         }
     }
 }
