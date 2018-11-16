@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Resíduos";
+}
+
+@model System.Collections.Generic.IList<Db.Residue>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table">
+            <thead>
+                <th>Id</th>
+                <th>Descrição</th>
+            </thead>
+            <tbody>
+                @foreach(Db.Residue residue in Model)
+                {
+                    <tr>
+                        <td>@residue.ResidueId</td>
+                        <td>@residue.ResidueName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

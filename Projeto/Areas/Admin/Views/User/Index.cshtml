@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Empresas";
+}
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Identity;
+@model IList<IdentityUser>;
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Administradores</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a href="/Admin/User/Create" class="btn btn-info">Incluir</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(IdentityUser user in Model)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
