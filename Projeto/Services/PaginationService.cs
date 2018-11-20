@@ -16,9 +16,10 @@ namespace Projeto.Services
             _context = context;
         }
         
-        public IList<T> Get<T, TKey>(int page, Func<T, TKey> orderBy) where T : class
+        public ServiceResponse<IList<T>> Get<T, TKey>(int page, Func<T, TKey> orderBy) where T : class
         {
-            return _context.Set<T>().OrderBy(orderBy).Skip((page - 1) * PAGE_SIZE).Take(PAGE_SIZE).ToList();
+            IList<T> data = _context.Set<T>().OrderBy(orderBy).Skip((page - 1) * PAGE_SIZE).Take(PAGE_SIZE).ToList();
+            return new ServiceResponse<IList<T>>(data);
         }
     }
 }

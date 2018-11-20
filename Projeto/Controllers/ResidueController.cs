@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Db;
 using Projeto.Services.Interfaces;
 using Projeto.Services;
+using System.Linq;
 
 namespace Projeto.Controllers
 {
@@ -20,7 +20,12 @@ namespace Projeto.Controllers
 
         public IActionResult Index(int page = 1)
         {
-            IList<Residue> residues = _paginationService.Get<Residue, string>(page, residue => residue.ResidueName);
+            IList<Domain.Residue> residues = 
+                _paginationService
+                .Get<Db.Residue, string>(page, residue => residue.ResidueName)
+                .Transform<IList<Domain.Residue>>(residueList => residueList.Select(residue => new Domain.Residue() { Id = residue.ResidueId, Name = residue.ResidueName }))
+                .Get();
+
             return View(residues);
         }
 
@@ -28,8 +33,13 @@ namespace Projeto.Controllers
         public IActionResult Create() => View();
         
         [HttpPost]
-        public async Task<IActionResult> Create(Residue residue)
+        public async Task<IActionResult> Create(Domain.Residue model)
         {
+            //TODO: Automapper
+            Db.Residue residue = new Db.Residue()
+            {
+                ResidueName = model.Name
+            };
             await _residueService.SaveAsync(residue);
             return RedirectToAction("Index");
         }
