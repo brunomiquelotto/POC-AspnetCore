@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Projeto.Services.Interfaces;
 using Projeto.Services;
 using System.Linq;
+using Projeto.Services.Mapping;
 
 namespace Projeto.Controllers
 {
@@ -23,9 +24,8 @@ namespace Projeto.Controllers
             IList<Domain.Residue> residues = 
                 _paginationService
                 .Get<Db.Residue, string>(page, residue => residue.ResidueName)
-                .Transform<IList<Domain.Residue>>(residueList => residueList.Select(residue => new Domain.Residue() { Id = residue.ResidueId, Name = residue.ResidueName }))
-                .Get();
-
+                .Transform(ResidueMapper.MapFrom)
+                .Value();
             return View(residues);
         }
 
@@ -35,11 +35,7 @@ namespace Projeto.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Domain.Residue model)
         {
-            //TODO: Automapper
-            Db.Residue residue = new Db.Residue()
-            {
-                ResidueName = model.Name
-            };
+            Db.Residue residue = ResidueMapper.MapFrom(model);
             await _residueService.SaveAsync(residue);
             return RedirectToAction("Index");
         }

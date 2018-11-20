@@ -2,7 +2,7 @@
     ViewData["Title"] = "Resíduos";
 }
 
-@model System.Collections.Generic.IList<Db.Residue>
+@model System.Collections.Generic.IList<Domain.Residue>
 
 <div class="row">
     <div class="col-xs-12">
@@ -24,11 +24,11 @@
                 <th>Descrição</th>
             </thead>
             <tbody>
-                @foreach(Db.Residue residue in Model)
+                @foreach(Domain.Residue residue in Model)
                 {
                     <tr>
-                        <td>@residue.ResidueId</td>
-                        <td>@residue.ResidueName</td>
+                        <td>@residue.Id</td>
+                        <td>@residue.Name</td>
                     </tr>
                 }
             </tbody>
