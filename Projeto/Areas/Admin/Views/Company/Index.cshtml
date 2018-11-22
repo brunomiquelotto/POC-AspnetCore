@@ -2,7 +2,7 @@
     ViewData["Title"] = "Empresas";
 }
 @using System.Collections.Generic;
-@using Db;
+@using Domain;
 @model IList<Company>;
 
 <div class="row">
@@ -24,7 +24,7 @@
                 @foreach(Company company in Model)
                 {
                     <tr>
-                        <td>@company.CompanyId</td>
+                        <td>@company.Id</td>
                         <td>@company.Name</td>
                     </tr>
                 }
