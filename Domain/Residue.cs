@@ -6,7 +6,8 @@ namespace Domain
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo Descrição é obrigatório")]
+        [MinLength(5, ErrorMessage = "Preencha no mínimo 5 caracteres")]
         public string Name { get; set; }
     }
 }
