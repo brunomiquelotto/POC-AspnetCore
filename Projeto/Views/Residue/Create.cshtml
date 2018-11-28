@@ -2,7 +2,7 @@
     ViewData["Title"] = "Novo Resíduo";
 }
 
-@model Domain.Residue
+@model Domain.ResidueDto
 
 <div class="row">
     <div class="col-xs-12">
@@ -17,7 +17,7 @@
 </div>
 
 <div class="row">
-    <form asp-action="Create" asp-controller="Residue" method="POST">
+    <form asp-action="Save" asp-controller="Residue" method="POST">
         <div class="form-group col-md-12">
             <label class="control-label" asp-for="Name">Descrição</label>
             <input type="text" class="form-control" asp-for="Name">

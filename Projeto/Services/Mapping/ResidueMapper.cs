@@ -1,19 +1,22 @@
+using Domain;
+using Db;
+
 namespace Projeto.Services.Mapping
 {
     public static class ResidueMapper
     {
-        public static Db.Residue MapFrom(Domain.Residue residueDto)
+        public static Residue MapFrom(ResidueDto residueDto)
         {
-            return new Db.Residue()
+            return new Residue()
             {
                 ResidueId = residueDto.Id,
                 ResidueName = residueDto.Name
             };
         }
 
-        public static Domain.Residue MapFrom(Db.Residue residue)
+        public static ResidueDto MapFrom(Db.Residue residue)
         {
-            return new Domain.Residue()
+            return new ResidueDto()
             {
                 Id = residue.ResidueId,
                 Name = residue.ResidueName

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
-    public class Residue
+    public class ResidueDto
     {
         public int Id { get; set; }
 

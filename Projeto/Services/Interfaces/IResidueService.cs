@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Db;
+using Domain;
 
 namespace Projeto.Services.Interfaces
 {
     public interface IResidueService
     {
-        Task<IList<Residue>> Residues(int skip = 0, int take = 10);
-        Task SaveAsync(Residue residue);
+        Task SaveAsync(ResidueDto residue);
+        Task<ResidueDto> GetAsync(int id);
+        Task DeleteAsync(int id);
     }
 }
